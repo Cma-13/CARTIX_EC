@@ -10,12 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
-from pathlib import Path
 import os
+from pathlib import Path
 from dotenv import load_dotenv
-
 load_dotenv()
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-vu1pg84hjjz!i4%f^vsmfm$&$spb&#&rtx9qszmya@w(8w@&yv'
+SECRET_KEY = 'django-insecure-pg5sv#dmn5bxtj96h*9hiii2%uv_$0)+hjen)*j(+r4pfz@@gg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -43,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'store',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -82,11 +81,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT'),
+        'NAME': os.getenv('DB_Name'),
+        'USER': os.getenv('DB_User'),
+        'PASSWORD': os.getenv('DB_Password'),
+        'HOST': os.getenv('DB_Host'),
+        'PORT': os.getenv('DB_Port'),
     }
 }
 
@@ -137,6 +136,6 @@ MAILERS = {
     },
 }
 
-CORS_ALLOW_ALL_ORIGINS = [
-    "http://localhost:3000",
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
 ]
