@@ -29,9 +29,13 @@ function ProductList() {
 
     }, []);
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
+     if (loading) {
+    return (
+        <div className="flex min-h-[300px] items-center justify-center">
+            <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-200 border-t-blue-600" />
+        </div>
+    );
+}
 
     if (error) {
         return <div>Error: {error}</div>;
