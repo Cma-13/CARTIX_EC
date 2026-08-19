@@ -29,49 +29,47 @@ function ProductDetails() {
   }, [id, BASEURL]);
 
   if (loading) {
-    return (
-      <div className="flex min-h-[300px] items-center justify-center">
-        <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-200 border-t-blue-600" />
-      </div>
-    );
+    return <div>Loading...</div>;
   }
-
   if (error) {
     return <div>Error: {error}</div>;
   }
-
   if (!product) {
-    return <div>Product not found</div>;
+    return <div>No product found</div>;
   }
 
+  const handleAddToCart = () => {
+    if(!localStorage.getItem('access_token')){
+      window.location.href = '/login';
+      return;
+    }
+    addToCart(product.id);
+  }
   return (
-    <div className="min-h-screen bg-gray-100 flex justify-center items-center p-10">
+    <div className="min-h-screen bg-gray-100 flex justify-center items-center py-10">
       <div className="bg-white shadow-lg rounded-2xl p-8 max-w-3xl w-full">
         <div className="flex flex-col md:flex-row gap-8">
           <img
             src={`${product.image}`}
             alt={product.name}
-            className="w-full md:w-1/2 h-auto object-coverrounded-lg"
+            className="w-full md:w-1/2 h-auto object-cover rounded-lg"
           />
           <div className="flex-1">
             <h1 className="text-3xl font-bold text-gray-800 mb-2">
               {product.name}
             </h1>
-
-            <p className="text-gray-600 mb-4">
-              {product.description}
+            <p className="text-gray-600 mb-4">{product.description}</p>
+            <p className="text-2xl font-semibold text-green-600 mb-6">
+              {product.price}
             </p>
-            <p className="text-xl text-gray-600 font-semibold mb-4">
-              Rs.{product.price}
-            </p>
-            <button onClick={()=> addToCart(product.id)} className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
-              Add to Cart
+            <button onClick={handleAddToCart} className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+                Add to Cart 
             </button>
             {/* Home Button */}
             <div className="mt-4">
               <a
                 href="/"
-                className="text-blue-600 hover:underline transition"
+                className="text-blue-600 hover:underline"
               >
                 &larr; Back to Home
               </a>
@@ -82,6 +80,5 @@ function ProductDetails() {
     </div>
   );
 }
-
 
 export default ProductDetails;
